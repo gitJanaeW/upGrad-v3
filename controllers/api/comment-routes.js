@@ -1,5 +1,3 @@
-// NOTE: Comment is beyond MVP, but I had extra time to make it
-
 const router = require('express').Router();
 const {User, Project, Comment} = require('../../models');
 
@@ -13,16 +11,20 @@ router.get('/', (req, res) => {
     });
 });
 
-// post a comment
+// comment on a project
 router.post('/', (req, res) => {
+    console.log(req);
     Comment.create({
         body: req.body.body,
-        user_id: req.session.user_id,
-        post_id: req.body.post_id
+        project_id: req.body.project_id,
+        user_id: 1 // change back to req.session.user_id later
+        
     })
-    .then(newComment => res.json(newComment))
+    .then(newComment => {
+        res.json(newComment) 
+        console.log("SUCCESS ADDED NEW COMMENT", newComment)})
     .catch(err => {
-        console.log(err);
+        console.log("Create Comment ERR", err);
         res.status(500).json(err);
     });
 });

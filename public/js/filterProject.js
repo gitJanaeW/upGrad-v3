@@ -71,16 +71,16 @@ const getSearchWords = (subjectVal, collabYesVal, collabNoVal, unfinishedYesVal,
     }
     // join the query fragments into one whole query & return
     if (queriesArr[0] === undefined) {
-        return `/dashboard`;
+        return `/home`;
     }
     const queryStr = queriesArr.join('');
     console.log(queryStr);
-    return `/dashboard/search${queryStr}`;
+    return `/home/search${queryStr}`;
 }
 
 // the url isn't changing correctly
-async function redirectDashboard (){
-    document.location.repalce('/dashboard/');
+async function redirectHome (){
+    document.location.repalce('/home/');
 }
 
 async function filter (event) {
@@ -97,4 +97,4 @@ async function filter (event) {
 }
 
 document.querySelector('#submit-btn').addEventListener('click', filter);
-document.querySelector('#clear-btn').addEventListener('click', redirectDashboard);
+document.querySelector('#clear-btn').addEventListener('click', redirectHome);

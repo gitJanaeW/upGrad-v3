@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-8">
+                    <div class="card-deck" style="width: 50rem;" id="project-card">
+                        <div class="card research-card">
+                            <div class="card-body">
+                                <h5 class="card-title display-4">{{project.dataValues.project_name}}</h5>
+                                <h5 class="card-subtitle mb-2 text-dark">{{project.dataValues.user.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{project.dataValues.user.institution}}</h6>
+                                <h6><span>Contact </span><a href="mailto:{{project.dataValues.user.email}}"
+                                        class="card-link">{{project.dataValues.user.name}}!</a> </h6>
+                                <h4 class="card-text">{{project.dataValues.abstract}}</h4>
+                                <h6><span class="badge bg-secondary">Subject: {{project.dataValues.subject}}</span><span
+                                        class="badge bg-secondary">Ongoing
+                                        Status: {{project.dataValues.ongoing_status}}</span><span class="badge bg-secondary">Seeking
+                                        Collaborators: {{project.dataValues.collab_status}}</span></h6>
+                                <h6><span>Check out my project here:</span><a href="#"
+                                        class="card-link">{{project.dataValues.project_url}}</a> </h6>
+                            </div>
+                        </div>
+                        {{#if project.comments}}
+                        <div class="mb-3 border rounded py-3 px-3 mx-2 bg-light">
+                            <h4>Comments</h4>
+                            <div class="d-flex mb-3">
+                                <textarea id='comment' class="card card-body d-flex" style="height: 60px"></textarea>
+                                <button id="create-comment-btn" class="button btn rounded border-secondary px-3 bg-white mx-1" style="height: 35px"><strong>✓</strong></button>
+                            </div>
+                            {{#each project.comments}}
+                            <div class="border border-secondary rounded p-1 bg-white">
+                                <p class="text-muted">{{dataValues.user.dataValues.name}}</p>
+                                <p>{{dataValues.body}}</p>
+                            </div>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+<script src="/js/createComment.js"></script

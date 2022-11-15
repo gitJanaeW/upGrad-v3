@@ -18,7 +18,7 @@ async function signupEventHandler(event) {
   });
 
   if (response.ok) {
-    document.location.replace("/dashboard/");
+    document.location.replace("/home/");
   } else {
     alert(response.statusText);
   }

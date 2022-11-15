@@ -6,6 +6,7 @@ const { body, validationResult } = require("express-validator");
 
 // find all users
 router.get("/", authLogin, (req, res) => {
+  console.log('I AM HERE IN API/USERS');
   User.findAll({
     raw: true,
     // respond with all attributes of user except password
@@ -50,41 +51,7 @@ router.get("/", authLogin, (req, res) => {
 
 // find a single user
 router.get("/:id", authLogin, (req, res) => {
-  User.findOne({
-    // respond with all attributes of user except password
-    attributes: {
-      // remove password attribute from the response
-      exclude: ["password"],
-      // add attribute ('project_count') to the response that keeps track of a user's number of Projects
-      include: [
-        [
-          sequelize.literal(
-            "(SELECT COUNT(*) FROM project WHERE user.id = project.user_id)"
-          ),
-          "project_count",
-        ],
-      ],
-    },
-    // only respond with user who matched params id
-    where: {
-      id: 1,
-    },
-    // also include a list of user projects
-    include: [
-      {
-        model: Project,
-      },
-    ],
-  })
-    // respond with user's data as specified above
-    .then((projects) => {
-      res.render('profile', { projects })
-    })
-    // display/respond with an error, if any
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  
 });
 
 // create a user (sign up)

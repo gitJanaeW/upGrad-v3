@@ -1,8 +1,6 @@
-// import models
-
-// const router = require('../controllers');
 const Project = require('./Project');
 const User = require('./User');
+const Comment = require('./Comment');
 
 // create associations
 User.hasMany(Project, {
@@ -15,23 +13,23 @@ Project.belongsTo(User, {
     onDelete: 'CASCADE'
 });
 
-//   Comment.belongsTo(User, {
-//     foreignKey: 'user_id',
-//     onDelete: 'SET NULL'
-//   });
+Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+});
 
-//   Comment.belongsTo(Post, {
-//     foreignKey: 'post_id',
-//     onDelete: 'SET NULL'
-//   });
+Comment.belongsTo(Project, {
+    foreignKey: 'project_id',
+    onDelete: 'SET NULL'
+});
 
-//   User.hasMany(Comment, {
-//     foreignKey: 'user_id',
-//     onDelete: 'SET NULL'
-//   });
+User.hasMany(Comment, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+});
 
-//   Post.hasMany(Comment, {
-//     foreignKey: 'post_id'
-//   });
+Project.hasMany(Comment, {
+    foreignKey: 'project_id'
+});
 
-module.exports = { User, Project };
+module.exports = {User, Project, Comment};
