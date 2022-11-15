@@ -21,21 +21,27 @@
                                         class="card-link">{{project.dataValues.project_url}}</a> </h6>
                             </div>
                         </div>
-                        {{#if project.comments}}
+                        
                         <div class="mb-3 border rounded py-3 px-3 mx-2 bg-light">
                             <h4>Comments</h4>
+                            {{#unless project.comments}}
+                            <p>Be the first to comment!</p>
+                            {{/unless}}
                             <div class="d-flex mb-3">
                                 <textarea id='comment' class="card card-body d-flex" style="height: 60px"></textarea>
                                 <button id="create-comment-btn" class="button btn rounded border-secondary px-3 bg-white mx-1" style="height: 35px"><strong>✓</strong></button>
                             </div>
+                            
+                            {{#if project.comments}}
                             {{#each project.comments}}
                             <div class="border border-secondary rounded p-1 bg-white">
                                 <p class="text-muted">{{dataValues.user.dataValues.name}}</p>
                                 <p>{{dataValues.body}}</p>
                             </div>
                             {{/each}}
+                            {{else}}
+                            {{/if}}
                         </div>
-                        {{/if}}
                     </div>
                 </div>
             </div>
