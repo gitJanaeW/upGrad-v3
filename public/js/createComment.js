@@ -6,17 +6,19 @@ async function postComment () {
     const urlArr = window.location.href.split('/');
     const project_id = urlArr[4];
     console.log("comment", body)
+    console.log("id", project_id)
     if(body){
         await fetch(`/api/comments`, {
             method: 'POST',
             body: JSON.stringify({
-                cbody: body,
+                body: body,
                 project_id
             }),
             headers: { "Content-Type": "application/json" }
         });
     }
-    location.reload();
+    console.log("RESPONE: \n=========================================\n");
+    // location.reload();
 }
 
 document.querySelector('#create-comment-btn').addEventListener('click', postComment);

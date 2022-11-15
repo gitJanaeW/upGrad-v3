@@ -71,16 +71,16 @@ const getSearchWords = (subjectVal, collabYesVal, collabNoVal, unfinishedYesVal,
     }
     // join the query fragments into one whole query & return
     if (queriesArr[0] === undefined) {
-        return `/home`;
+        return `/`;
     }
     const queryStr = queriesArr.join('');
     console.log(queryStr);
-    return `/home/search${queryStr}`;
+    return `/search${queryStr}`;
 }
 
 // the url isn't changing correctly
 async function redirectHome (){
-    document.location.repalce('/home/');
+    document.location.repalce('/');
 }
 
 async function filter (event) {
