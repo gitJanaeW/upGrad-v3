@@ -1,0 +1,135 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="display-1">{{userProjects.0.user.name}}</div>
+
+
+                <h5 class="mt-0"></h5>
+                <h1 class="card-subtitle mb-2 text-dark">{{userProjects.0.user.institution}}</h1>
+                <button class="btn btn-light rounded-pill">Message</button>
+                <button class="btn btn-light rounded-pill" onclick="openProjectForm()" id="filter-btn">Add
+                    Project</button>
+                <button class="btn btn-light rounded-pill" onclick="revealResearch()" id="filter-btn">View
+                    Projects</button>
+
+                {{!-- ADD PROJECT FORM --}}
+                <div class="container" id="show-form-filter">
+                    <form class="project-form" id="filter-form"
+                        class="mb-3 d-flex flew-row flex-wrap justify-content-center border align-items-center rounded py-3 mx-2 bg-light">
+                        <div class="m-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h1> Enter Your Project Information</h1>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <div>
+                                            <label for="project-name">Project Name: </label>
+                                            <input type="search" id="project-name" name="project-name-query">
+                                        </div>
+                                        <div>
+                                            <h5><label for="subject-query">Subject: </label>
+                                                <input type="search" id="subject-query" name="subject-query">
+                                            </h5>
+                                        </div>
+                                        <div>
+                                            <h5><label for="project-url">Project URL: </label>
+                                                <input type="search" id="project-url" name="subject-query">
+                                            </h5>
+                                        </div>
+
+                                    </h5>
+                                    <textarea rows="4" cols="50" name="comment" form="usrform" id="abstract-input"
+                                        placeholder="Enter abstract here..."></textarea>
+                                </div>
+                                <div class="d-flex flex-row">
+
+                                    <div class="m-4">
+                                        <p>Finished</p>
+                                        <label for="finished-query-yes">Yes</label>
+                                        <input type="radio" id="finished-query-yes" name="finished-query">
+                                        <label for="finished-query-no">No</label>
+                                        <input type="radio" id="finished-query-no" name="finished-query">
+                                    </div>
+                                    <div class="m-4">
+                                        <p>Seeking Collab</p>
+                                        <label for="collab-query-yes">Yes</label>
+                                        <input class="mt-1" type="radio" id="collab-query-yes" name="collab-query">
+                                        <label for="collab-query-no">No</label>
+                                        <input type="radio" id="collab-query-no" name="collab-query">
+                                    </div>
+                                    <div class="m-4">
+                                        <button class="btn btn-outline-dark btn-lg rounded-pill"
+                                            type="Submit">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{{!--
+form for adding a project --}}
+
+
+{{!-- research cards --}}
+<div class="container" id="show-filter">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+            {{#each userProjects}}
+            {{log user.email}}
+            <div class="row">
+                <div class="col-8">
+                    <div class="card-deck" style="width: 50rem;" id="project-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title display-4">
+                                    {{project_name}}
+                                </h5>
+                                <h5 class="card-subtitle mb-2 text-dark">
+                                    {{user.name}}
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    {{user.institution}}
+                                </h6>
+                                <h4 class="card-text">
+                                    {{abstract}}
+                                </h4>
+                                <h6><span class="badge bg-secondary">Subject:
+                                        {{subject}}
+                                    </span><span class="badge bg-secondary">Ongoing
+                                        Status:
+                                        {{ongoing_status}}
+                                    </span><span class="badge bg-secondary">Seeking
+                                        Collaborators:
+                                        {{collab_status}}
+                                    </span></h6>
+                                <h6><span>Check out my project here:</span><a href="#" class="card-link">
+                                        {{project_url}}
+                                    </a> </h6>
+                                     <div class="m-4">
+                                        <button value={{id}} class="btn btn-outline-dark btn-lg rounded-pill delete "
+                                            >delete</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+</div>
+<script src="/js/profile.js"></script>
