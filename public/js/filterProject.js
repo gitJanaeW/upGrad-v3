@@ -3,19 +3,14 @@ const collabYesVal = document.querySelector('#collab-query-yes');
 const collabNoVal = document.querySelector('#collab-query-no');
 const unfinishedYesVal = document.querySelector('#finished-query-yes');
 const unfinishedNoVal = document.querySelector('#finished-query-no');
-// const obj = {subject: subjectVal.value, collab: collabVal.value, unfinished: unfinishedVal.value};
 // this function is creating a query string based on what the user enters. This query string would then be handled
 // on the backend.
 const getSearchWords = (subjectVal, collabYesVal, collabNoVal, unfinishedYesVal, unfinishedNoVal) => {
-    if (!subjectVal.valu, !collabYesVal, !collabNoVal, !unfinishedYesVal, unfinishedNoVal)
+    if (!subjectVal, !collabYesVal, !collabNoVal, !unfinishedYesVal, unfinishedNoVal)
     console.log(subjectVal);
     const queriesArr = [];
     let queryCount = 0;
-    let subjectQuery;
-    let collabYesQuery;
-    let collabNoQuery;
-    let unfinishedYesQuery;
-    let unfinishedNoQuery;
+    let subjectQuery, collabYesQuery, collabNoQuery, unfinishedYesQuery, unfinishedNoQuery;
     // if there is a value in input field...
     if (subjectVal !== '') {
         // change the start of the query string from '?' to '&'  based on if there are already one or more queries
@@ -71,16 +66,15 @@ const getSearchWords = (subjectVal, collabYesVal, collabNoVal, unfinishedYesVal,
     }
     // join the query fragments into one whole query & return
     if (queriesArr[0] === undefined) {
-        return `/`;
+        return `/dashboard`;
     }
     const queryStr = queriesArr.join('');
     console.log(queryStr);
-    return `/search${queryStr}`;
+    return `/dashboard/search${queryStr}`;
 }
 
-// the url isn't changing correctly
-async function redirectHome (){
-    document.location.repalce('/');
+async function redirectDashboard (){
+    document.location.replace('/dashboard/');
 }
 
 async function filter (event) {
@@ -97,4 +91,4 @@ async function filter (event) {
 }
 
 document.querySelector('#submit-btn').addEventListener('click', filter);
-document.querySelector('#clear-btn').addEventListener('click', redirectHome);
+document.querySelector('#clear-btn').addEventListener('click', redirectDashboard);

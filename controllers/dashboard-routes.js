@@ -2,45 +2,59 @@ const router = require("express").Router();
 const sequelize = require("sequelize");
 const { User, Project } = require("../models");
 const authLogin = require("../utils/auth");
+const getWhereObj = require("../utils/projectQueryObj");
 
-//display all projects user has
+// display a list of projects on homepage authLogin,
 router.get("/", authLogin, (req, res) => {
-  User.findOne({
-    // respond with all attributes of user except password
-    attributes: {
-      // remove password attribute from the response
-      exclude: ["password"],
-      // add attribute ('project_count') to the response that keeps track of a user's number of Projects
-      include: [
-        [
-          sequelize.literal(
-            "(SELECT COUNT(*) FROM project WHERE user.id = project.user_id)"
-          ),
-          "project_count",
-        ],
-      ],
-    },
-    // only respond with user who matched params id
-    where: {
-      id: req.session.user_id,
-    },
-    // also include a list of user projects
+  Project.findAll({
+    order: [["id", "ASC"]],
     include: [
       {
-        model: Project
+        model: User,
+        attributes: ["name", "institution", "email"],
       },
     ],
   })
-    // respond with user's data as specified above
-    .then((projects) => {
-      res.render('profile', { projects })
+    .then((allProjectsData) => {
+      // this formats the data Sequelize gives us in a readable format
+      const allProjects = allProjectsData.map((project) =>
+        project.get({ plain: true })
+      );
+      res.render("dashboard", { allProjects });
     })
-    // display/respond with an error, if any
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
+
+router.get("/search", authLogin, (req, res) => {
+  const where = getWhereObj(req.query);
+  Project.findAll({
+    where,
+    order: [["id", "ASC"]],
+    include: [
+      {
+        model: User,
+        attributes: ["name", "institution", "email"],
+      },
+    ],
+  })
+    .then((allProjectsData) => {
+      // this formats the data Sequelize gives us in a readable format
+      const allProjects = allProjectsData.map((project) =>
+        project.get({ plain: true })
+      );
+
+      res.render("dashboard", { allProjects });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+
 
 router.get("/edit/:id", authLogin, (req, res) => {
   // get a project (based on project id)
@@ -62,9 +76,10 @@ router.get("/edit/:id", authLogin, (req, res) => {
         return;
       }
       const project = projectData.get({ plain: true });
-      // use the data from the response to render edit-project.handlebars
+      // use the data from the response + loggedIn status to render edit-project.handlebars
       res.render("edit-project", {
-        project
+        project,
+        // loggedIn: req.session.loggedIn
       });
     })
     .catch((err) => {

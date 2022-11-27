@@ -1,57 +1,39 @@
 const router = require("express").Router();
-const { User, Project, Comment } = require("../models");
-const authLogin = require("../utils/auth");
+const { User, Project } = require("../../models");
+const authLogin = require("../../utils/auth");
+const getWhereObj = require('../../utils/projectQueryObj');
+// const filterLogin = require('../../public/js/filterProject');
+
+// fetch(`api/projects?subject=math?inst=Carleton?`)
+
 
 // get all projects (shown from newest to oldest)
-router.get("/", (req, res) => {
+router.get("/", authLogin, (req, res) => {
   console.log(req.body);
   Project.findAll({
-    include: [
-      {
-        model: Comment,
-        attributes: ['id', 'body', 'user_id', 'project_id', 'created_at'],
-        include: {
-          model: User,
-          attributes: ['name']
-        }
-      },
-      {
-        model: User,
-        attributes: ['name']
-      }
-    ],
+    // attributes: {
+    //     include: [['created_at']]
+    // },
     // newest posts will show first based on id number
     order: [["id", "ASC"]],
   })
-    .then((allProjects) => res.json(allProjects))
+    .then((allProjects) => res.render('dashboard', { allProjects }))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
-
 // get a single project
 router.get("/:id", authLogin, (req, res) => {
   Project.findOne({
+    // attributes: {
+    //     include: [['created_at']]
+    // },
     where: {
       id: req.params.id,
     },
-    include: [
-      {
-        model: Comment,
-        attributes: ['id', 'body', 'user_id', 'project_id', 'created_at'],
-        include: {
-          model: User,
-          attributes: ['name']
-        }
-      },
-      {
-        model: User,
-        attributes: ['name']
-      }
-    ]
   })
-    .then((project) => res.render('project', {project}))
+    .then((projectData) => res.json(projectData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -70,7 +52,9 @@ router.post("/", (req, res) => {
     ongoing_status: req.body.ongoing_status,
   })
     .then((newProjectData) => {
-      res.json(newProjectData);
+      console.log('hi')
+      console.log(newProjectData)
+      res.json(newProjectData)
 
     })
     .catch((err) => {

@@ -1,12 +1,13 @@
 const comment = document.querySelector('#comment');
 
-async function postComment () {
+async function postComment (e) {
+    e.preventDefault();
     // get the required values & fetch
     const body = comment.value;
     const urlArr = window.location.href.split('/');
     const project_id = urlArr[4];
     console.log("comment", body)
-    console.log("id", project_id)
+    console.log("project_id", project_id)
     if(body){
         await fetch(`/api/comments`, {
             method: 'POST',
@@ -18,7 +19,7 @@ async function postComment () {
         });
     }
     console.log("RESPONE: \n=========================================\n");
-    // location.reload();
+    location.reload();
 }
 
 document.querySelector('#create-comment-btn').addEventListener('click', postComment);

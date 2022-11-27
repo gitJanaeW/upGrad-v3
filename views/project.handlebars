@@ -1,49 +1,41 @@
-<div class="container">
-    <div class="row">
-        <div class="col-2">
-        <div class="col-8">
-            <div class="row">
-                <div class="col-8">
-                    <div class="card-deck" style="width: 50rem;" id="project-card">
-                        <div class="card research-card">
-                            <div class="card-body">
-                                <h5 class="card-title display-4">{{project.dataValues.project_name}}</h5>
-                                <h5 class="card-subtitle mb-2 text-dark">{{project.dataValues.user.name}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{project.dataValues.user.institution}}</h6>
-                                <h6><span>Contact </span><a href="mailto:{{project.dataValues.user.email}}"
-                                        class="card-link">{{project.dataValues.user.name}}!</a> </h6>
-                                <h4 class="card-text">{{project.dataValues.abstract}}</h4>
-                                <h6><span class="badge bg-secondary">Subject: {{project.dataValues.subject}}</span><span
-                                        class="badge bg-secondary">Ongoing
-                                        Status: {{project.dataValues.ongoing_status}}</span><span class="badge bg-secondary">Seeking
-                                        Collaborators: {{project.dataValues.collab_status}}</span></h6>
-                                <h6><span>Check out my project here:</span><a href="#"
-                                        class="card-link">{{project.dataValues.project_url}}</a> </h6>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-3 border rounded py-3 px-3 mx-2 bg-light">
-                            <h4>Comments</h4>
-                            {{#unless project.comments}}
-                            <p>Be the first to comment!</p>
-                            {{/unless}}
-                            <div class="d-flex mb-3">
-                                <textarea id='comment' class="card card-body d-flex" style="height: 60px"></textarea>
-                                <button id="create-comment-btn" class="button btn rounded border-secondary px-3 bg-white mx-1" style="height: 35px"><strong>✓</strong></button>
-                            </div>
-                            
-                            {{#if project.comments}}
-                            {{#each project.comments}}
-                            <div class="border border-secondary rounded p-1 bg-white">
-                                <p class="text-muted">{{dataValues.user.dataValues.name}}</p>
-                                <p>{{dataValues.body}}</p>
-                            </div>
-                            {{/each}}
-                            {{else}}
-                            {{/if}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="my-5 col-10 col-lg-9 mx-auto">
+    <div>
+        <h2>{{project.project_name}}</h2>
+        <h5 class="my-1 text-dark fw-bold">
+            <a class="text-decoration-none text-dark" href="mailto:{{project.user.email}}">{{project.user.name}}</a>
+        </h5>
+        <p class="my-2">
+            <span class="badge bg-secondary my-1 my-md-0">{{project.subject}}</span>
+            <span class="badge bg-secondary my-1 my-md-0">Ongoing Status: {{project.ongoing_status}}</span>
+            <span class="badge bg-secondary my-1 my-md-0">Seeking Collaborators: {{project.collab_status}}</span>
+        </p>
+        
+        <h6 class="card-subtitle mb-2 text-muted">{{project.user.institution}}</h6>
+        <p>{{project.abstract}}</p>
+        <h6>
+            <a class="text-decoration-none btn btn-outline-dark rounded text-dark" href="{{project.project_url}}">Read the paper ➔</a>
+        </h6>
+    </div>            
+</div>
+<div class="bg-dark text-white">
+    <div class="py-4 col-10 col-lg-9 mx-auto">
+        <h4>Comments</h4>
+        {{#unless project.comments}}
+        <p>Be the first to comment!</p>
+        {{/unless}}
+        <div class="d-flex mb-3">
+            <textarea id='comment' class="card card-body d-flex text-dark" style="height: 60px"></textarea>
+            <button id="create-comment-btn" class="button btn rounded border-secondary px-3 bg-white mx-1" style="height: 35px"><strong>✓</strong></button>
         </div>
+        {{#if project.comments}}
+            {{#each project.comments}}
+            <div class="border border-secondary rounded p-2 bg-white">
+                <p class="text-muted my-0">{{user.name}}</p>
+                <p class="text-dark">{{body}}</p>
+            </div>
+            {{/each}}
+        {{/if}}
+    </div>
+</div>
+                            
 <script src="/js/createComment.js"></script

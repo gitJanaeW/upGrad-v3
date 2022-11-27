@@ -33,7 +33,7 @@ Project.init(
     collab_status: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: ""
     },
     project_url: {
       type: DataTypes.STRING,
@@ -49,7 +49,7 @@ Project.init(
     ongoing_status: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: ""
     },
     // createdAt: {
     //     type: 'TIMESTAMP',

@@ -1,0 +1,52 @@
+<div class="my-4 col-10 col-lg-9 mx-auto">
+    <a class="btn btn-dark mb-2" data-toggle="collapse" href="#filterMenu" role="button">+ Filter</a>
+    <div class="collapse" id="filterMenu">
+        <form id="filter-form"
+            class="d-flex flew-row flex-wrap justify-content-center border align-items-center rounded py-3 bg-dark text-white">
+            <div class="m-4">
+                <label for="subject-query">Subject</label>
+                <input type="search" id="subject-query" name="subject-query">
+            </div>
+            <div class="d-flex flex-row">
+                <div class="m-4">
+                    <p>Finished</p>
+                    <label for="finished-query-yes">Yes</label>
+                    <input type="radio" id="finished-query-yes" name="finished-query">
+                    <label for="finished-query-no">No</label>
+                    <input type="radio" id="finished-query-no" name="finished-query">
+                </div>
+                <div class="m-4">
+                    <p>Seeking Collab</p>
+                    <label for="collab-query-yes">Yes</label>
+                    <input class="mt-1" type="radio" id="collab-query-yes" name="collab-query">
+                    <label for="collab-query-no">No</label>
+                    <input type="radio" id="collab-query-no" name="collab-query">
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <button id="submit-btn" class="rounded bg-white my-1">Filter</button>
+                <button id="clear-btn" class="rounded bg-white my-1">Clear Filters</button>
+            </div>
+        </form>
+    </div>
+    <div class="d-flex flex-column-reverse">
+        {{#each allProjects}}
+        <a class="text-decoration-none text-dark" href="/project/{{id}}">
+            <div class="card my-3 p-3">
+                <h4>{{project_name}} ➔</h4>
+                <p class="my-0">
+                    <span class="badge bg-secondary my-1 my-md-0">{{subject}}</span>
+                    <span class="badge bg-secondary my-1 my-md-0">Ongoing Status: {{ongoing_status}}</span>
+                    <span class="badge bg-secondary my-1 my-md-0">Seeking Collaborators: {{collab_status}}</span>
+                </p>
+                <p class="my-1 text-dark fw-bold">
+                    <a class="text-decoration-none text-dark" href="mailto:{{user.email}}">{{user.name}}</a>
+                </p>
+                <h6 class="card-subtitle mb-2 text-muted">{{user.institution}}</h6>
+                <p>{{abstract}}</p>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</div>
+<script src="/js/filterProject.js"></script>

@@ -15,7 +15,7 @@ async function loginFormHandler(event) {
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace("/dashboard/");
     } else {
       const json = await response.json();
       alert(json.message);
@@ -23,6 +23,4 @@ async function loginFormHandler(event) {
   }
 }
 
-document
-  .querySelector(".login-form")
-  .addEventListener("submit", loginFormHandler);
+document.querySelector(".login-form").addEventListener("submit", loginFormHandler);
