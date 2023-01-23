@@ -36,5 +36,5 @@ app.use(routes);
 
 // {force:false}: optional. if true, will drop and recreate db of all tables on startup. (Equiv to DROP TABLE IF EXISTS)
 sequelize.sync({ force: false }).then(() => {
-  app.listen(`0.0.0.0:${PORT}`, () => console.log("Now listening")); // used to listen at PORT instead of `0.0.0.0:$PORT`
+  app.listen(PORT,  "0.0.0.0", () => console.log("Now listening")); // used to listen at PORT instead of `0.0.0.0:$PORT`
 });
