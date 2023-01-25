@@ -157,6 +157,10 @@ router.post("/login", (req, res) => {
         req.session.user_id = dbUserData.id;
         req.session.name = dbUserData.name;
         req.session.loggedIn = true;
+        res.cookie('user_id', req.session.user_id, {
+          maxAge: 1800000,
+          httpOnly: true
+        });
         res.json(req.session);
       });
     })
@@ -173,6 +177,7 @@ router.post("/logout", (req, res) => {
     return;
   }
   req.session.destroy(() => {
+    res.clearCookie("user_id");
     res.json(req.session);
   });
 });
