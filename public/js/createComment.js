@@ -6,8 +6,6 @@ async function postComment (e) {
     const body = comment.value;
     const urlArr = window.location.href.split('/');
     const project_id = urlArr[4];
-    console.log("comment", body)
-    console.log("project_id", project_id)
     if(body){
         await fetch(`/api/comments`, {
             method: 'POST',
@@ -18,7 +16,6 @@ async function postComment (e) {
             headers: { "Content-Type": "application/json" }
         });
     }
-    console.log("RESPONE: \n=========================================\n");
     location.reload();
 }
 

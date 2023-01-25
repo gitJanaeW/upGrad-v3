@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
 
 // comment on a project
 router.post('/', (req, res) => {
-    console.log(req);
     Comment.create({
         body: req.body.body,
         project_id: req.body.project_id,
