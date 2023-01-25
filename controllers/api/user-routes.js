@@ -91,7 +91,7 @@ router.get("/:id", authLogin, (req, res) => {
 router.post(
   "/signup",
   body("email").isEmail().withMessage("email is invalid"),
-  body("password").isLength({ min: 5 }).withMessage("password to short"),
+  body("password").isLength({ min: 5 }).withMessage("password too short"),
   body("name").notEmpty().withMessage("please provide a name"),
   body("institution")
     .notEmpty()
@@ -117,7 +117,10 @@ router.post(
           req.session.user_id = dbUserData.id;
           req.session.name = dbUserData.name;
           req.session.loggedIn = true;
-
+          res.cookie('user_id', req.session.user_id, {
+            maxAge: 1800000,
+            httpOnly: true
+          });
           res.json(req.session);
         });
       })
