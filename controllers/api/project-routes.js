@@ -9,7 +9,6 @@ const getWhereObj = require('../../utils/projectQueryObj');
 
 // get all projects (shown from newest to oldest)
 router.get("/", authLogin, (req, res) => {
-  console.log(req.body);
   Project.findAll({
     // attributes: {
     //     include: [['created_at']]
@@ -52,10 +51,7 @@ router.post("/", (req, res) => {
     ongoing_status: req.body.ongoing_status,
   })
     .then((newProjectData) => {
-      console.log('hi')
-      console.log(newProjectData)
-      res.json(newProjectData)
-
+      res.json(newProjectData);
     })
     .catch((err) => {
       console.log(err);

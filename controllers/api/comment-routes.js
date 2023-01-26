@@ -13,12 +13,10 @@ router.get('/', (req, res) => {
 
 // comment on a project
 router.post('/', (req, res) => {
-    console.log(req);
     Comment.create({
         body: req.body.body,
         project_id: req.body.project_id,
-        user_id: 1 // change back to req.session.user_id later
-        
+        user_id: req.cookies.user_id
     })
     .then(newComment => {
         res.json(newComment) 

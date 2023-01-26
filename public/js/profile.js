@@ -11,8 +11,8 @@ async function createProjects(e) {
   var subject = subjectInput.value;
   var abstract = abstractInput.value;
   var project_url = projectUrlInput.value;
-  var collab_status = "no";
-  var ongoing_status = "no";
+  var collab_status = "No";
+  var ongoing_status = "No";
 
   if (radioCollabYesInput.checked) {
     collab_status = "Yes";

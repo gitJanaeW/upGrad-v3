@@ -1,6 +1,5 @@
 async function signupEventHandler(event) {
   event.preventDefault();
-  console.log("hello");
 
   const email = document.querySelector("#email-signup").value.trim();
   const password = document.querySelector("#password-signup").value.trim();

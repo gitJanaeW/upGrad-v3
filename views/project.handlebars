@@ -29,6 +29,7 @@
         </div>
         {{#if project.comments}}
             {{#each project.comments}}
+            {{log user}}
             <div class="border border-secondary rounded p-2 bg-white">
                 <p class="text-muted my-0">{{user.name}}</p>
                 <p class="text-dark">{{body}}</p>
